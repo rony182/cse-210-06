@@ -2,12 +2,12 @@
 
 ## Game Mockup
 
-![Game's mockup](.\mockup.png)
+![Game's mockup](mockup.png)
 
 ## Wish List
 
-You can check the wish list [here](.\WISHME.md).
+You can check the wish list [here](WISHME.md).
 
 ## Feature List
 
-You can check the wish list [here](.\FEATUREME.md).
+You can check the wish list [here](FEATUREME.md).
