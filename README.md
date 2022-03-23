@@ -112,6 +112,10 @@ root                    (project root folder)
     +-- WISHME.md           (desirable features info)
 +-- README.md           (general info)
 ```
+
+## Required Technologies
+* Python 3.9.0
+
 ## Authors (CSE210 winter 2022: Team 08)
 * Kwazeme Ogubie (ogu21006@byui.edu)
 * A. Belén Chaparro (cha21065@byui.edu)
