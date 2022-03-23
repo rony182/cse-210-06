@@ -10,7 +10,6 @@ The game continues as long as the player is alive.
 5. The game continues as long as the player is alive.
 
 ## Game Mockup
-<<<<<<< HEAD
 ---
 ![Game's mockup](.\zombie_invasion\readme_elements\mockup.png)
 
