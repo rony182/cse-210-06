@@ -4,6 +4,14 @@ from game.casting.point import Point
 class MouseService:
     """A mouse service inteface."""
 
+    def __init__(self):
+        """Constructs a new MouseService"""
+        self.mouse_keys = {
+            "left" : pyray.MOUSE_BUTTON_LEFT,
+            "right" : pyray.MOUSE_BUTTON_RIGHT,
+            "middle" : pyray.MOUSE_BUTTON_MIDDLE
+        }
+
     def get_coordinates(self):
         """Gets the current mouse coordinates as a Point.
         
