@@ -1,3 +1,6 @@
+import pyray
+from game.casting.point import Point
+
 class MouseService:
     """A mouse service inteface."""
 
@@ -5,9 +8,11 @@ class MouseService:
         """Gets the current mouse coordinates as a Point.
         
         Returns:
-            Point: An instance of the batter.casting.Point class.
+            Point: An instance of the game.casting.Point class.
         """
-        raise NotImplementedError("not implemented in base class")
+        x = pyray.get_mouse_x()
+        y = pyray.get_mouse_y()
+        return Point(x, y)
 
     def has_mouse_moved(self):
         """Whether or not the mouse has moved since the last frame.
