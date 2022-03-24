@@ -6,7 +6,7 @@ class MouseService:
 
     def __init__(self):
         """Constructs a new MouseService"""
-        self.mouse_keys = {
+        self._mouse_keys = {
             "left" : pyray.MOUSE_BUTTON_LEFT,
             "right" : pyray.MOUSE_BUTTON_RIGHT,
             "middle" : pyray.MOUSE_BUTTON_MIDDLE
@@ -39,7 +39,7 @@ class MouseService:
         Returns:
             True if the button is pressed; false if otherwise.
         """
-        raise NotImplementedError("not implemented in base class")
+        return pyray.is_mouse_button_down(self._mouse_keys[button])
     
     def is_button_pressed(self, button):
         """Detects if the given button was pressed once.
