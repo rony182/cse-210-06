@@ -61,7 +61,7 @@ class MouseService:
         Returns:
             True if the button was released once; false if otherwise.
         """
-        raise NotImplementedError("not implemented in base class")
+        return pyray.is_mouse_button_released(self._mouse_keys[button])
     
     def is_button_up(self, button):
         """Detects if the given button is released.
