@@ -4,8 +4,7 @@ from game.scripting.action import Action
 class LoadAssetsAction(Action):
 
     def __init__(self, audio_service, video_service):
-        """Constructs a LoadAssetsAction object.
-        """
+        """Constructs a LoadAssetsAction object."""
         self._audio_service = audio_service
         self._video_service = video_service
 
