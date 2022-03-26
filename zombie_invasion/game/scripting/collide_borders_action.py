@@ -17,7 +17,7 @@ class CollideBordersAction(Action):
         x = position.get_x()
                 
         if x < FIELD_LEFT:
-            body.set_velocity(Point(0, 0))
+            player.stop_moving()
             
         elif x >= (FIELD_RIGHT - GUNNER_WIDTH):
-            body.set_velocity(Point(0, 0))
+            player.stop_moving()
