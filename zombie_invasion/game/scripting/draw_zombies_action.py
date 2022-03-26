@@ -12,9 +12,9 @@ class DrawZombiesAction(Action):
         for zombie in zombies:
             body = zombie.get_body()
 
-            # if zombie.is_debug():
-            #     background_rectangle = body.get_rectangle()
-            #     self._video_service.draw_rectangle(background_rectangle, BLACK)
+            if zombie.is_debug():
+                background_rectangle = body.get_rectangle()
+                self._video_service.draw_rectangle(background_rectangle, BLACK)
             
             image = zombie.get_image()
             position = body.get_position()
