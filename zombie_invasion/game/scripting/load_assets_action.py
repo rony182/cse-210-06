@@ -16,7 +16,7 @@ class LoadAssetsAction(Action):
             script (Script): The script of actions in the game.
             callback (ActionCallback): A callback to change the scene.
         """
-        self._video_service.load_fonts("game/assets/fonts")
-        self._audio_service.load_sounds("game/assets/sounds")
-        self._video_service.load_images("game/assets/images")
+        self._video_service.load_fonts("zombie_invasion\\assets\\fonts")
+        self._audio_service.load_sounds("zombie_invasion\\assets\\sounds")
+        self._video_service.load_images("zombie_invasion\\assets\\images")
         
