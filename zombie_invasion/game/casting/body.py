@@ -1,4 +1,5 @@
 from game.casting.point import Point
+from game.casting.rectangle import Rectangle
 
 
 class Body:
@@ -33,6 +34,14 @@ class Body:
             An instance of Point containing the horizontal and vertical speed.
         """
         return self._velocity
+
+    def get_rectangle(self):
+        """Gets the rectangle enclosing the body.
+        
+        Returns:
+            An instance of Rectangle.
+        """
+        return Rectangle(self._position, self._size)
         
     def set_position(self, position):
         """Sets the position to the given value.
