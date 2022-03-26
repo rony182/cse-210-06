@@ -1,6 +1,7 @@
 from constants import *
 from game.casting.sound import Sound
 from game.scripting.action import Action
+from game.casting.point import Point
 
 class CollideBordersAction(Action):
 
@@ -9,4 +10,14 @@ class CollideBordersAction(Action):
         self._audio_service = audio_service    
         
     def execute(self, cast, script, callback):
-        pass
+        
+        player = cast.get_first_actor(GUNNER_GROUP)
+        body = player.get_body()
+        position = body.get_position()
+        x = position.get_x()
+                
+        if x < FIELD_LEFT:
+            body.set_velocity(Point(0, 0))
+            
+        elif x >= (FIELD_RIGHT - GUNNER_WIDTH):
+            body.set_velocity(Point(0, 0))
