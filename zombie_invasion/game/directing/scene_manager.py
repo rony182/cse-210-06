@@ -260,10 +260,6 @@ class SceneManager:
     def _add_output_script(self, script):
         script.clear_actions(OUTPUT)
         script.add_action(OUTPUT, self.START_DRAWING_ACTION)
-        script.add_action(OUTPUT, self.DRAW_HUD_ACTION)
-        script.add_action(OUTPUT, self.DRAW_BULLET_ACTION)
-        script.add_action(OUTPUT, self.DRAW_ZOMBIES_ACTION)
-        script.add_action(OUTPUT, self.DRAW_PLAYER_ACTION)
         script.add_action(OUTPUT, self.DRAW_DIALOG_ACTION)
         script.add_action(OUTPUT, self.END_DRAWING_ACTION)
 
