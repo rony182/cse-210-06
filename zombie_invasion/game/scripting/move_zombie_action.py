@@ -8,12 +8,15 @@ class MoveZombieAction(Action):
         pass
         
     def execute(self, cast, script, callback):
-        zombie = cast.get_first_actor(ZOMBIE_GROUP)
-        body = zombie.get_body()
-        position = body.get_position()
-        velocity = body.get_velocity()
-        position = position.add(velocity)
-        body.set_position(position)
+        
+        zombies = cast.get_actors(ZOMBIE_GROUP)
+        for zombie in zombies:
+#        zombie = cast.get_first_actor(ZOMBIE_GROUP)
+            body = zombie.get_body()
+            position = body.get_position()
+            velocity = body.get_velocity()
+            position = position.add(velocity)
+            body.set_position(position)
 
 # trying to make the zombies to track the Gunnar and move towards it.
     # def execute(elf, cast, script, callback):
