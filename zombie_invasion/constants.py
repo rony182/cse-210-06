@@ -114,8 +114,8 @@ ZOMBIE_IMAGES = {
     "b": [f"assets\\images\\zombie_{i:02}.png"for i in range(1, 3)],
     "c": [f"assets\\images\\zombie_{i:02}.png"for i in range(1, 3)],
 }
-ZOMBIE_WIDTH = 50
-ZOMBIE_HEIGHT = 10
+ZOMBIE_WIDTH = 12
+ZOMBIE_HEIGHT = 20
 ZOMBIE_POINTS = 5
 
 
