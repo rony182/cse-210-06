@@ -5,6 +5,7 @@ from game.casting.color import Color
 # ------------------------------
 
 # TITLE
+GAME_NAME = "Zombie Invasion"
 FRAME_RATE = 60
 
 # SCREEN
@@ -119,7 +120,6 @@ ZOMBIE_IMAGES = {
 ZOMBIE_WIDTH = 12
 ZOMBIE_HEIGHT = 20
 ZOMBIE_POINTS = 5
-
 
 # DIALOG
 DIALOG_GROUP = "dialogs"
