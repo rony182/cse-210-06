@@ -8,7 +8,7 @@ class Bullet(Actor):
     """A solid, spherical object that is bounced around in the game."""
     
     def __init__(self, body, image, debug = False):
-        """Constructs a new Ball.
+        """Constructs a new Bullet.
 
         Args:
             body: A new instance of Body.
@@ -20,7 +20,7 @@ class Bullet(Actor):
         self._image = image
 
     def get_body(self):
-        """Gets the ball's body.
+        """Gets the bullet's body.
         
         Returns:
             An instance of Body.
@@ -28,7 +28,7 @@ class Bullet(Actor):
         return self._body
 
     def get_image(self):
-        """Gets the ball's image.
+        """Gets the bullet's image.
         
         Returns:
             An instance of Image.
