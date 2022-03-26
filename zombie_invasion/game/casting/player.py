@@ -10,7 +10,7 @@ class Player(Actor):
         
         Args:
             body: A new instance of Body.
-            image: A new instance of Image.
+            image: A new instance of I.
             debug: Whether it is being debugged.
         """
         super().__init__(debug)
@@ -38,16 +38,6 @@ class Player(Actor):
         new_position = position.add(velocity)
         self._body.set_position(new_position)
 
-    def swing_left(self):
-        """Moves the player to the left."""
-        velocity = Point(-GUNNER_VELOCITY, 0)
-        self._body.set_velocity(velocity)
-        
-    def swing_right(self):
-        """Moves the player to the right."""
-        velocity = Point(GUNNER_VELOCITY, 0)
-        self._body.set_velocity(velocity)
-    
     def stop_moving(self):
         """Stops the player from moving."""
         velocity = Point(0, 0)
