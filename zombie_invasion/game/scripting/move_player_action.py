@@ -5,9 +5,6 @@ from game.scripting.action import Action
 
 class MovePlayerAction(Action):
 
-    def __init__(self):
-        pass
-
     def execute(self, cast, script, callback):
         player = cast.get_first_actor(PLAYER_GROUP)
         body = player.get_body()
