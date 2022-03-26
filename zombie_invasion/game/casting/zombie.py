@@ -7,7 +7,7 @@ class Zombie(Actor):
     """A zombie that wants to eat the player."""
 
     def __init__(self, body, image, points, debug = False):
-        """Constructs a new Ball.
+        """Constructs a new Zombie.
 
         Args:
             body: A new instance of Body.
