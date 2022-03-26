@@ -4,7 +4,7 @@ from game.casting.point import Point
 from game.scripting.action import Action
 
 
-class MoveShotAction(Action):
+class MoveBulletAction(Action):
 
     def __init__(self, physics_service, audio_service):
         self._physics_service = physics_service
