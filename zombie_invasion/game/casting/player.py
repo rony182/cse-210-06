@@ -5,7 +5,7 @@ from game.casting.point import Point
 class Player(Actor):
     """A person that shoots zombies in the game."""
 
-    def __innit__(self, body, image, debug = False):
+    def __init__(self, body, image, debug = False):
         """Constructs a new character.
         
         Args:
@@ -31,6 +31,13 @@ class Player(Actor):
         """
         return self._image
 
+    def set_image(self, image):
+        """Sets the character's image according to the player's choice
+        
+        Args: A string that contains the image path.
+        """
+        self._image = image
+
     def move_next(self):
         """Moves the player using its velocity."""
         position = self._body.get_position()
@@ -41,4 +48,4 @@ class Player(Actor):
     def stop_moving(self):
         """Stops the player from moving."""
         velocity = Point(0, 0)
-        self._body.set_velocity(velocity)
+        self._body.set_velocity(velocity)   
