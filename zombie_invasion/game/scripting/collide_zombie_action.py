@@ -23,8 +23,6 @@ class CollideZombieAction(Action):
                 stats = cast.get_first_actor(STATS_GROUP)
                 stats.lose_life()
                 
-                if stats.get_lives() > 0:
-                    callback.on_next(TRY_AGAIN)
-                else:
+                if stats.get_lives() == 0:
                     callback.on_next(GAME_OVER)
                     self._audio_service.play_sound(OVER_SOUND)
