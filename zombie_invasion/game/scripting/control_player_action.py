@@ -8,10 +8,10 @@ class ControlPlayerAction(Action):
         self._keyboard_service = keyboard_service
         
     def execute(self, cast, script, callback):
-        gunner = cast.get_first_actor(GUNNER_GROUP)
+        player = cast.get_first_actor(PLAYER_GROUP)
         if self._keyboard_service.is_key_down(LEFT): 
-            gunner.swing_left()
+            player.swing_left()
         elif self._keyboard_service.is_key_down(RIGHT): 
-            gunner.swing_right()  
+            player.swing_right()  
         else: 
-            gunner.stop_moving() 
+            player.stop_moving() 

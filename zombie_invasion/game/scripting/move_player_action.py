@@ -9,7 +9,7 @@ class MovePlayerAction(Action):
         pass
 
     def execute(self, cast, script, callback):
-        player = cast.get_first_actor(GUNNER_GROUP)
+        player = cast.get_first_actor(PLAYER_GROUP)
         body = player.get_body()
         velocity = body.get_velocity()
         position = body.get_position()
@@ -19,7 +19,7 @@ class MovePlayerAction(Action):
 
         if x < 0:
             position = Point(0, position.get_y())
-        elif x > (SCREEN_WIDTH - GUNNER_WIDTH):
-            position = Point(SCREEN_WIDTH - GUNNER_WIDTH, position.get_y())
+        elif x > (SCREEN_WIDTH - PLAYER_WIDTH):
+            position = Point(SCREEN_WIDTH - PLAYER_WIDTH, position.get_y())
             
         body.set_position(position)

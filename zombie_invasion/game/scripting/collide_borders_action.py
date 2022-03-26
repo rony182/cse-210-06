@@ -11,7 +11,7 @@ class CollideBordersAction(Action):
         
     def execute(self, cast, script, callback):
         
-        player = cast.get_first_actor(GUNNER_GROUP)
+        player = cast.get_first_actor(PLAYER_GROUP)
         body = player.get_body()
         position = body.get_position()
         x = position.get_x()
@@ -19,5 +19,5 @@ class CollideBordersAction(Action):
         if x < FIELD_LEFT:
             player.stop_moving()
             
-        elif x >= (FIELD_RIGHT - GUNNER_WIDTH):
+        elif x >= (FIELD_RIGHT - PLAYER_WIDTH):
             player.stop_moving()

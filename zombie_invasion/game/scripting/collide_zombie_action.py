@@ -13,11 +13,11 @@ class CollideZombieAction(Action):
         
     def execute(self, cast, script, callback):
         zombies = cast.get_actors(ZOMBIE_GROUP)
-        gunner = self._player
+        player = self._player
         
         for zombie in zombies:
             zombie_body= zombie.get_body()
-            player_body = gunner.get_body()
+            player_body = player.get_body()
             if self._physics_service.has_collided(player_body, zombie_body):
                 sound = Sound(ZOMBIE_ATTACK_SOUND)
                 self._audio_service.play_sound(sound)
