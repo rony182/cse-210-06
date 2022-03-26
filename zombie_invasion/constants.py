@@ -32,6 +32,8 @@ ZOMBIE_ATTACK_SOUND = "assets\\sounds\\zombie_attack.mp3"
 WELCOME_SOUND = "assets\\sounds\\start.wav"
 OVER_SOUND = "assets\\sounds\\over.wav"
 BACKGROUND_SOUND = "assets\\sounds\\mixkit-piano-horror.mp3"
+IMPACT_SOUND = "assets\\sounds\\mixkit-bullet-impact.wav"
+BULLET_MISSED_TARGET = "assets\\sounds\\mixkit-wizard-fire-woosh.wav"
 
 # TEXT
 ALIGN_CENTER = 0
