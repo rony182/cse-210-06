@@ -16,7 +16,7 @@ class LoadAssetsAction(Action):
             script (Script): The script of actions in the game.
             callback (ActionCallback): A callback to change the scene.
         """
-        self._audio_service.load_sounds("batter/assets/sounds")
-        self._video_service.load_fonts("batter/assets/fonts")
-        self._video_service.load_images("batter/assets/images")
+        self._video_service.load_fonts("game/assets/fonts")
+        self._video_service.load_images("game/assets/images")
+        self._audio_service.load_sounds("game\assets/sounds")
         
