@@ -9,8 +9,8 @@ class MovePlayerAction(Action):
         pass
 
     def execute(self, cast, script, callback):
-        gun = cast.get_first_actor(GUNNER_GROUP)
-        body = gun.get_body()
+        player = cast.get_first_actor(GUNNER_GROUP)
+        body = player.get_body()
         velocity = body.get_velocity()
         position = body.get_position()
         x = position.get_x()
