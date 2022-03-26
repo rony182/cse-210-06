@@ -17,6 +17,6 @@ class LoadAssetsAction(Action):
             callback (ActionCallback): A callback to change the scene.
         """
         self._video_service.load_fonts("game/assets/fonts")
+        self._audio_service.load_sounds("game/assets/sounds")
         self._video_service.load_images("game/assets/images")
-        self._audio_service.load_sounds("game\assets/sounds")
         
