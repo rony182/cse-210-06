@@ -58,7 +58,7 @@ class RaylibVideoService(VideoService):
         alignment = text.get_alignment()
         tint = self._to_raylib_color(Color(255, 255, 255))
 
-        font = self._fonts[filepath]
+        font = self._fonts[f"zombie_invasion\\{filepath}"]
         text_image = pyray.image_text_ex(font, value, size, spacing, tint)
         
         x = position.get_x()
