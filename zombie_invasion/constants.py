@@ -1,11 +1,10 @@
-from game.casting import Color
+from game.casting.color import Color
 
 # ------------------------------
 # GENERAL GAME CONSTANTS
 # ------------------------------
 
 # TITLE
-GAME_NAME = "Zombie Invasion"
 FRAME_RATE = 60
 
 # SCREEN
@@ -56,9 +55,12 @@ PAUSE = "p"
 
 # SCENES
 NEW_GAME = 0
-TRY_AGAIN = 1
-IN_PLAY = 2
-GAME_OVER = 3
+HOW_TO_PLAY = 1
+PLAYER_SELECTION = 2
+IN_PLAY = 3
+YOU_WIN = 4
+GAME_OVER = 5
+
 
 # -----------------------
 # SCRIPTING CONSTANTS
@@ -117,7 +119,6 @@ ZOMBIE_IMAGES = {
 ZOMBIE_WIDTH = 12
 ZOMBIE_HEIGHT = 20
 ZOMBIE_POINTS = 5
-
 
 
 # DIALOG
