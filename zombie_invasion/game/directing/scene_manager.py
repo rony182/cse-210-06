@@ -68,6 +68,11 @@ class SceneManager:
     START_GAME = "Press ENTER to play"
     HOW_TO_PLAY = "Press H for help"
 
+    # HOW TO PLAY SCENE
+    SCENE_NAME = "How to play"
+    INSTRUCTIONS = "Insert instructions here"
+    SCORE_TABLE = "Insert score here"
+
     def __init__(self):
         pass
 
@@ -91,9 +96,9 @@ class SceneManager:
     
     def _prepare_new_game(self, cast, script):
 
-        self._add_dialog(cast, self.GAME_NAME)
+        cast.clear_actors(DIALOG_GROUP)
+        self._add_dialog(cast, self.GAME_NAME, CENTER_X, 100)
         self._add_dialog(cast, self.START_GAME)
-        self._add_dialog(cast, self.HOW_TO_PLAY)
 
         # Adds video and audio service initialization
         self._add_initialize_script(script)
@@ -106,7 +111,14 @@ class SceneManager:
         self._add_release_script(script)
         
     def _prepare_how_to_play(self, cast, script):
-        pass
+        
+        cast.clear_actors(DIALOG_GROUP)
+        self._add_dialog(cast, self.SCENE_NAME, CENTER_X, 100)
+        self._add_dialog(cast, self.INSTRUCTIONS, CENTER_X, CENTER_Y)
+        self._add_dialog(cast, self.SCORE_TABLE, CENTER_X, CENTER_Y + 200)
+
+        script.clear_actions(INPUT)
+        script.add_action(INPUT, ChangeSceneAction(self.KEYBOARD_SERVICE, PLAYER_SELECTION))
 
     def _prepare_player_selection(self, cast, script):
         self._add_bullet(cast)
@@ -151,22 +163,6 @@ class SceneManager:
     # ----------------------------------------------------------------------------------------------
     # casting methods
     # ----------------------------------------------------------------------------------------------
-    
-    #def _activate_bullet(self, cast):
-    #    BULLET = cast.get_first_actor(BULLET_GROUP)
-    #    BULLET.release()
-
-    #def _add_bullet(self, cast):
-    #    cast.clear_actors(BULLET_GROUP)
-    #    x = CENTER_X - BULLET_WIDTH / 2
-    #    y = SCREEN_HEIGHT - PLAYER_HEIGHT - BULLET_HEIGHT  
-    #    position = Point(x, y)
-    #    size = Point(BULLET_WIDTH, BULLET_HEIGHT)
-    #    velocity = Point(0, 0)
-    #    body = Body(position, size, velocity)
-    #    image = Image(BULLET_IMAGE)
-    #    BULLET = BULLET(body, image, True)
-    #    cast.add_actor(BULLET_GROUP, BULLET)
 
     def _add_zombies(self, cast):
         cast.clear_actors(ZOMBIE_GROUP)
@@ -201,10 +197,9 @@ class SceneManager:
                     zombie = Zombie(body, animation, points)
                     cast.add_actor(ZOMBIE_GROUP, zombie)
 
-    def _add_dialog(self, cast, message):
-        cast.clear_actors(DIALOG_GROUP)
+    def _add_dialog(self, cast, message, x = CENTER_X, y = CENTER_Y):
         text = Text(message, FONT_FILE, FONT_SMALL, ALIGN_CENTER)
-        position = Point(CENTER_X, CENTER_Y)
+        position = Point(x, y)
         label = Label(text, position)
         cast.add_actor(DIALOG_GROUP, label)
 
