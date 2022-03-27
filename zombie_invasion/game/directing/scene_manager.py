@@ -64,14 +64,20 @@ class SceneManager:
     # -----------------------
 
     # NEW GAME SCENE
-    GAME_NAME = "Zombie Invasion"
+    SCENE_0_NAME = "Zombie Invasion"
     START_GAME = "Press ENTER to play"
     HOW_TO_PLAY = "Press H for help"
 
     # HOW TO PLAY SCENE
-    SCENE_NAME = "How to play"
+    SCENE_1_NAME = "How to play"
     INSTRUCTIONS = "Insert instructions here"
     SCORE_TABLE = "Insert score here"
+
+    # PLAYER SELECTION SCENE
+    SCENE_2_NAME = "Choose your character"
+    SELECT_CHARACTER = "Press ENTER to start"
+    PREVIOUS_CHARACTER = "<- Previous"
+    NEXT_CHARACTER = "Next ->"
 
     def __init__(self):
         pass
@@ -82,7 +88,7 @@ class SceneManager:
         elif scene == HOW_TO_PLAY:
              self._prepare_how_to_play(cast, script)
         elif scene == PLAYER_SELECTION:
-            self._prepare_player_selection(script)
+            self._prepare_player_selection(cast, script)
         elif scene == IN_PLAY:
             self._prepare_in_play(cast, script)
         elif scene == YOU_WIN:
@@ -97,9 +103,8 @@ class SceneManager:
     def _prepare_new_game(self, cast, script):
 
         cast.clear_actors(DIALOG_GROUP)
-        self._add_dialog(cast, self.GAME_NAME, CENTER_X, 100)
+        self._add_dialog(cast, self.SCENE_0_NAME, CENTER_X, 100)
         self._add_dialog(cast, self.START_GAME)
-
         # Adds video and audio service initialization
         self._add_initialize_script(script)
         # Adds assets
@@ -113,7 +118,7 @@ class SceneManager:
     def _prepare_how_to_play(self, cast, script):
         
         cast.clear_actors(DIALOG_GROUP)
-        self._add_dialog(cast, self.SCENE_NAME, CENTER_X, 100)
+        self._add_dialog(cast, self.SCENE_1_NAME, CENTER_X, 100)
         self._add_dialog(cast, self.INSTRUCTIONS, CENTER_X, CENTER_Y)
         self._add_dialog(cast, self.SCORE_TABLE, CENTER_X, CENTER_Y + 200)
 
@@ -121,13 +126,16 @@ class SceneManager:
         script.add_action(INPUT, ChangeSceneAction(self.KEYBOARD_SERVICE, PLAYER_SELECTION))
 
     def _prepare_player_selection(self, cast, script):
-        self._add_bullet(cast)
-        self._add_zombies(cast)
-        self._add_player(cast)
-        self._add_dialog(cast, PREP_TO_LAUNCH)
+        
+        cast.clear_actors(DIALOG_GROUP)
+        self._add_dialog(cast, self.SCENE_2_NAME, CENTER_X, 100)
+        self._add_dialog(cast, self.PREVIOUS_CHARACTER, 100, CENTER_Y)
+        self._add_dialog(cast, self.NEXT_CHARACTER, SCREEN_WIDTH - 100)
+        self._add_dialog(cast, self.SELECT_CHARACTER, CENTER_X, SCREEN_HEIGHT - 100)
 
         script.clear_actions(INPUT)
-        script.add_action(INPUT, TimedChangeSceneAction(IN_PLAY, 2))
+        script.add_action(INPUT, ChangeSceneAction(self.KEYBOARD_SERVICE, IN_PLAY))
+        #script.add_action(INPUT, TimedChangeSceneAction(IN_PLAY, 2))
         self._add_output_script(script)
         script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, WELCOME_SOUND))
         
