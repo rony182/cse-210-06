@@ -15,7 +15,6 @@ class DrawPlayerAction(Action):
             gun = body.get_rectangle()
             self._video_service.draw_rectangle(gun, YELLOW)
             
-        animation = player.get_animation()
-        image = animation.next_image()
+        image = player.get_image()
         position = body.get_position()
         self._video_service.draw_image(image, position)
