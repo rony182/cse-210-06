@@ -5,6 +5,7 @@ from game.casting.body import Body
 from game.casting.zombie import Zombie
 from game.casting.image import Image
 from game.casting.label import Label
+from game.casting.player import Player
 from game.casting.point import Point
 from game.casting.stats import Stats
 from game.casting.text import Text 
@@ -12,6 +13,7 @@ from game.scripting.change_scene_action import ChangeSceneAction
 from game.scripting.check_over_action import CheckOverAction
 from game.scripting.collide_borders_action import CollideBordersAction
 from game.scripting.collide_zombie_action import CollideZombieAction
+from game.scripting.control_player_action import ControlPlayerAction
 from game.scripting.draw_bullet_action import DrawBulletAction
 from game.scripting.draw_player_action import DrawPlayerAction
 from game.scripting.draw_zombies_action import DrawZombiesAction
@@ -45,11 +47,12 @@ class SceneManager:
     CHECK_OVER_ACTION = CheckOverAction()
     COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_ZOMBIE_ACTION = CollideZombieAction(PHYSICS_SERVICE, AUDIO_SERVICE)
+    CONTROL_PLAYER_ACTION = ControlPlayerAction(KEYBOARD_SERVICE)
     DRAW_BULLET_ACTION = DrawBulletAction(VIDEO_SERVICE)
     DRAW_ZOMBIES_ACTION = DrawZombiesAction(VIDEO_SERVICE)
     DRAW_DIALOG_ACTION = DrawDialogAction(VIDEO_SERVICE)
     DRAW_HUD_ACTION = DrawHudAction(VIDEO_SERVICE)
-    DRAW_PLAYER_ACTION= DrawPlayerAction(VIDEO_SERVICE)
+    DRAW_PLAYER_ACTION = DrawPlayerAction(VIDEO_SERVICE)
     END_DRAWING_ACTION = EndDrawingAction(VIDEO_SERVICE)
     INITIALIZE_DEVICES_ACTION = InitializeDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     LOAD_ASSETS_ACTION = LoadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
@@ -78,6 +81,10 @@ class SceneManager:
     SELECT_CHARACTER = "Press ENTER to start"
     PREVIOUS_CHARACTER = "<- Previous"
     NEXT_CHARACTER = "Next ->"
+
+
+    # Player Image Filepath
+    PLAYER_FILEPATH = "zombie_invasion\\assets\\images\\gunner_01.png"
 
     def __init__(self):
         pass
@@ -139,24 +146,17 @@ class SceneManager:
         self._add_output_script(script)
         script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, WELCOME_SOUND))
         
-    def _prepare_try_again(self, cast, script):
-        self._add_bullet(cast)
-        self._add_player(cast)
-        self._add_dialog(cast, PREP_TO_LAUNCH)
-
-        script.clear_actions(INPUT)
-        script.add_action(INPUT, TimedChangeSceneAction(IN_PLAY, 2))
-        self._add_update_script(script)
-        self._add_output_script(script)
-
     def _prepare_in_play(self, cast, script):
-        self._activate_bullet(cast)
+        #self._activate_bullet(cast)
         cast.clear_actors(DIALOG_GROUP)
 
+        self._add_player(cast)
         script.clear_actions(INPUT)
         script.add_action(INPUT, self.CONTROL_PLAYER_ACTION)
-        self._add_update_script(script)
-        self._add_output_script(script)
+        script.add_action(OUTPUT, self.DRAW_PLAYER_ACTION)
+
+    def _prepare_you_win(self, cast, script):
+        pass
 
     def _prepare_game_over(self, cast, script):
         self._add_bullet(cast)
@@ -211,13 +211,6 @@ class SceneManager:
         label = Label(text, position)
         cast.add_actor(DIALOG_GROUP, label)
 
-    def _add_level(self, cast):
-        cast.clear_actors(LEVEL_GROUP)
-        text = Text(LEVEL_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_LEFT)
-        position = Point(HUD_MARGIN, HUD_MARGIN)
-        label = Label(text, position)
-        cast.add_actor(LEVEL_GROUP, label)
-
     def _add_lives(self, cast):
         cast.clear_actors(LIVES_GROUP)
         text = Text(LIVES_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_RIGHT)
@@ -245,8 +238,9 @@ class SceneManager:
         size = Point(PLAYER_WIDTH, PLAYER_HEIGHT)
         velocity = Point(0, 0)
         body = Body(position, size, velocity)
-        animation = Animation(PLAYER_IMAGES, PLAYER_RATE)
-        player = Player(body, animation)
+        #animation = Animation(PLAYER_IMAGES, PLAYER_RATE)
+        image = Image(self.PLAYER_FILEPATH)
+        player = Player(body, image)
         cast.add_actor(PLAYER_GROUP, player)
 
     # ----------------------------------------------------------------------------------------------
