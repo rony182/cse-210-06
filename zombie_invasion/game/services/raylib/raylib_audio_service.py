@@ -24,7 +24,7 @@ class RaylibAudioService(AudioService):
         # fixed os dependent filepath
         filepath = str(pathlib.Path(filepath))
         volume = sound.get_volume()
-        sound = self._sounds[filepath]
+        sound = self._sounds[f"zombie_invasion\\{filepath}"]
         # pyray.set_sound_volume(volume)
         pyray.play_sound(sound)
     
