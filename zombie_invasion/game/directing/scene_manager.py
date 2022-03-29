@@ -73,7 +73,13 @@ class SceneManager:
 
     # HOW TO PLAY SCENE
     SCENE_1_NAME = "How to play"
-    INSTRUCTIONS = "Insert instructions here"
+    INSTRUCTIONS = f"1. Choose a character to start playing.\n"
+    f"2. Move the character to left or right with the arrow keys."
+    f"3. Press \"space bar\" to shoot the zombies."
+    f"! You will lose a life if you get bitten by a zombie."
+    f"! Some zombies require multiple shots to die."
+    f"! If 10+ zombies walk past you, you will lose a life."
+    f"GOOD LUCK AND STAY ALIVE!"
     SCORE_TABLE = "Insert score here"
 
     # PLAYER SELECTION SCENE
@@ -84,7 +90,7 @@ class SceneManager:
 
 
     # Player Image Filepath
-    PLAYER_FILEPATH = "zombie_invasion\\assets\\images\\gunner_01.png"
+    PLAYER_FILEPATH = "zombie_invasion\\assets\\images\\player_1.png"
 
     def __init__(self):
         pass
