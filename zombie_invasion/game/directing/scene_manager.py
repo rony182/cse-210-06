@@ -17,6 +17,7 @@ from game.scripting.collide_borders_action import CollideBordersAction
 from game.scripting.collide_zombie_action import CollideZombieAction
 from game.scripting.collide_bullet_action import CollideBulletAction
 from game.scripting.control_player_action import ControlPlayerAction
+from game.scripting.control_bullet_action import ControlBulletAction
 from game.scripting.draw_bullet_action import DrawBulletAction
 from game.scripting.draw_player_action import DrawPlayerAction
 from game.scripting.draw_zombies_action import DrawZombiesAction
@@ -53,6 +54,7 @@ class SceneManager:
     COLLIDE_ZOMBIE_ACTION = CollideZombieAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_BULLET_ACTION = CollideBulletAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     CONTROL_PLAYER_ACTION = ControlPlayerAction(KEYBOARD_SERVICE)
+    CONTROL_BULLET_ACTION= ControlBulletAction(KEYBOARD_SERVICE)
     DRAW_BULLET_ACTION = DrawBulletAction(VIDEO_SERVICE)
     DRAW_ZOMBIES_ACTION = DrawZombiesAction(VIDEO_SERVICE)
     DRAW_DIALOG_ACTION = DrawDialogAction(VIDEO_SERVICE)
@@ -98,6 +100,7 @@ class SceneManager:
 
     # Player Image Filepath
     PLAYER_FILEPATH = "zombie_invasion\\assets\\images\\player_3_30px.png"
+    BULLET_FILEPATH = "zombie_invasion\\assets\\images\\bullet.png"
 
     def __init__(self):
         pass
@@ -170,6 +173,7 @@ class SceneManager:
         # Clear previous INPUT actions
         script.clear_actions(INPUT)
         # Add the CONTROL_PLAYER_ACTION to make the player go left or right
+        script.add_action(INPUT, self.CONTROL_BULLET_ACTION)
         script.add_action(INPUT, self.CONTROL_PLAYER_ACTION)
         # Add the MOVE_ZOMBIE_ACTION to make zombies go down automatically
         script.add_action(UPDATE, self.MOVE_ZOMBIE_ACTION)
@@ -180,6 +184,7 @@ class SceneManager:
         # Add the DRAW_PLAYER and DRAW_ZOMBIES actions to make them appear
         script.add_action(OUTPUT, self.DRAW_PLAYER_ACTION)
         script.add_action(OUTPUT, self.DRAW_ZOMBIES_ACTION)
+        script.add_action(OUTPUT, self.DRAW_BULLET_ACTION)
 
     def _prepare_you_win(self, cast, script):
         pass
@@ -248,10 +253,12 @@ class SceneManager:
         size = Point(PLAYER_WIDTH, PLAYER_HEIGHT)
         velocity = Point(0, 0)
         body = Body(position, size, velocity)
+        bullet = Bullet(body, self.BULLET_FILEPATH)
         #animation = Animation(PLAYER_IMAGES, PLAYER_RATE)
         image = Image(self.PLAYER_FILEPATH)
         player = Player(body, image)
         cast.add_actor(PLAYER_GROUP, player)
+        cast.add_actor(PLAYER_GROUP, bullet)
 
     # ----------------------------------------------------------------------------------------------
     # scripting methods
@@ -285,5 +292,5 @@ class SceneManager:
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
         script.add_action(UPDATE, self.COLLIDE_ZOMBIE_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BULLET_ACTION)
-        
+        script.add_action(UPDATE, self.DRAW_BULLET_ACTION)
         script.add_action(UPDATE, self.CHECK_OVER_ACTION)
