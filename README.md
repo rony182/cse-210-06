@@ -11,7 +11,7 @@ The game continues as long as the player is alive.
 
 ## Game Mockup
 ---
-![Game's mockup](.\zombie_invasion\readme_elements\mockup.png)
+![Game's mockup](./zombie_invasion/readme_elements/project_mockup.png)
 
 ## Wish List
 
