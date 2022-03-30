@@ -5,7 +5,6 @@ from game.casting.image import Image
 from game.casting.point import Point
 from game.scripting.action import Action
 
-BULLET_FILEPATH = "zombie_invasion\\assets\\images\\bullet.png"
 class ControlBulletAction(Action):
 
     def __init__(self, keyboard_service):
