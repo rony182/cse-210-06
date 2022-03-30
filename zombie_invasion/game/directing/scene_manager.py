@@ -155,18 +155,20 @@ class SceneManager:
         script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, WELCOME_SOUND))
         
     def _prepare_in_play(self, cast, script):
-
+        # Clear all previous dialogs
         cast.clear_actors(DIALOG_GROUP)
-
+        # Add the player
         self._add_player(cast)
-
+        # Add the zombies
         self._add_zombies(cast)
 
+        # Clear previous INPUT actions
         script.clear_actions(INPUT)
+        # Add the CONTROL_PLAYER_ACTION to make the player go left or right
         script.add_action(INPUT, self.CONTROL_PLAYER_ACTION)
-
+        # Add the MOVE_ZOMBIE_ACTION to make zombies go down automatically
         script.add_action(UPDATE, self.MOVE_ZOMBIE_ACTION)
-
+        # Add the DRAW_PLAYER and DRAW_ZOMBIES actions to make them appear
         script.add_action(OUTPUT, self.DRAW_PLAYER_ACTION)
         script.add_action(OUTPUT, self.DRAW_ZOMBIES_ACTION)
 
@@ -188,53 +190,21 @@ class SceneManager:
     # ----------------------------------------------------------------------------------------------
 
     def _add_zombies(self, cast):
+        # Clear any previous zombies from Cast
         cast.clear_actors(ZOMBIE_GROUP)
-        
+        # Create a certain number of zombies
         for _ in range(10):
-
+            # Get image file
             img = Image("zombie_invasion\\assets\\images\\zombie_1_30px.png")
-
+            # Get random positions for the zombie to appear
             x = randint(0, SCREEN_WIDTH)
             y = randint(0, SCREEN_HEIGHT)
-
+            # Create the Zombie body
             body = Body(Point(x, y), Point(ZOMBIE_WIDTH, ZOMBIE_HEIGHT), Point(0, ZOMBIE_VELOCITY))
-
+            # Create Zombie
             zombie = Zombie(body, img, 10)
-
+            # Add Zombie to the cast
             cast.add_actor(ZOMBIE_GROUP, zombie)
-
-
-        """
-        stats = cast.get_first_actor(STATS_GROUP)
-        level = stats.get_level() % BASE_LEVELS
-        filename = LEVEL_FILE.format(level)
-
-        with open(filename, 'r') as file:
-            reader = csv.reader(file, skipinitialspace=True)
-
-            for r, row in enumerate(reader):
-                for c, column in enumerate(row):
-
-                    x = FIELD_LEFT + c * ZOMBIE_WIDTH
-                    y = FIELD_TOP + r * ZOMBIE_HEIGHT
-                    color = column[0]
-                    frames = int(column[1])
-                    points = ZOMBIE_POINTS 
-                    
-                    if frames == 1:
-                        points *= 2
-                    
-                    position = Point(x, y)
-                    size = Point(ZOMBIE_WIDTH, ZOMBIE_HEIGHT)
-                    velocity = Point(0, 0)
-                    images = ZOMBIE_IMAGES[color][0:frames]
-
-                    body = Body(position, size, velocity)
-                    animation = Animation(images, ZOMBIE_RATE, ZOMBIE_DELAY)
-
-                    zombie = Zombie(body, animation, points)
-                    cast.add_actor(ZOMBIE_GROUP, zombie)
-        """
 
     def _add_dialog(self, cast, message, x = CENTER_X, y = CENTER_Y):
         text = Text(message, FONT_FILE, FONT_SMALL, ALIGN_CENTER)
