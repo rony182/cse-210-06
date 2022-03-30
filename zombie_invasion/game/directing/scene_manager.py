@@ -1,4 +1,5 @@
 import csv
+from random import randint
 from constants import *
 from game.casting.animation import Animation
 from game.casting.body import Body
@@ -153,13 +154,17 @@ class SceneManager:
         script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, WELCOME_SOUND))
         
     def _prepare_in_play(self, cast, script):
-        #self._activate_bullet(cast)
+
         cast.clear_actors(DIALOG_GROUP)
 
         self._add_player(cast)
+
+        self._add_zombies(cast)
+
         script.clear_actions(INPUT)
         script.add_action(INPUT, self.CONTROL_PLAYER_ACTION)
         script.add_action(OUTPUT, self.DRAW_PLAYER_ACTION)
+        script.add_action(OUTPUT, self.DRAW_ZOMBIES_ACTION)
 
     def _prepare_you_win(self, cast, script):
         pass
@@ -181,6 +186,21 @@ class SceneManager:
     def _add_zombies(self, cast):
         cast.clear_actors(ZOMBIE_GROUP)
         
+        for _ in range(10):
+
+            img = Image("zombie_invasion\\assets\\images\\zombie_1_30px.png")
+
+            x = randint(0, SCREEN_WIDTH)
+            y = randint(0, SCREEN_HEIGHT)
+
+            body = Body(Point(x, y), Point(ZOMBIE_WIDTH, ZOMBIE_HEIGHT), Point(0, ZOMBIE_VELOCITY))
+
+            zombie = Zombie(body, img, 10)
+
+            cast.add_actor(ZOMBIE_GROUP, zombie)
+
+
+        """
         stats = cast.get_first_actor(STATS_GROUP)
         level = stats.get_level() % BASE_LEVELS
         filename = LEVEL_FILE.format(level)
@@ -210,6 +230,7 @@ class SceneManager:
 
                     zombie = Zombie(body, animation, points)
                     cast.add_actor(ZOMBIE_GROUP, zombie)
+        """
 
     def _add_dialog(self, cast, message, x = CENTER_X, y = CENTER_Y):
         text = Text(message, FONT_FILE, FONT_SMALL, ALIGN_CENTER)
