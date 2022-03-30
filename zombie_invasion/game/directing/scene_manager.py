@@ -72,6 +72,10 @@ class SceneManager:
     START_DRAWING_ACTION = StartDrawingAction(VIDEO_SERVICE)
     UNLOAD_ASSETS_ACTION = UnloadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
 
+    ########
+
+    STATS = Stats()
+
     # -----------------------
     # SCENE CONSTANTS
     # -----------------------
@@ -172,6 +176,12 @@ class SceneManager:
         # Add the zombies
         self._add_zombies(cast)
 
+        cast.add_actor(STATS_GROUP, self.STATS)
+        score_lbl = Label(Text(""), Point(SCORE_MARGIN, HUD_MARGIN))
+        lives_lbl = Label(Text(""), Point(LIVES_MARGIN, HUD_MARGIN))
+        cast.add_actor(SCORE_GROUP, score_lbl)
+        cast.add_actor(LIVES_GROUP, lives_lbl)
+
         # Clear previous INPUT actions
         script.clear_actions(INPUT)
         # Add the CONTROL_PLAYER_ACTION to make the player go left or right
@@ -187,6 +197,7 @@ class SceneManager:
         # Add the colission action with the borders
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
         # Add the DRAW_PLAYER and DRAW_ZOMBIES actions to make them appear
+        script.add_action(OUTPUT, self.DRAW_HUD_ACTION)
         script.add_action(OUTPUT, self.DRAW_PLAYER_ACTION)
         script.add_action(OUTPUT, self.DRAW_ZOMBIES_ACTION)
         script.add_action(OUTPUT, self.DRAW_BULLET_ACTION)
