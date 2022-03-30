@@ -26,3 +26,4 @@ class CollideBulletAction(Action):
                     #points = zombie.get_points()
                     #stats.add_points(points)
                     cast.remove_actor(ZOMBIE_GROUP, zombie)
+                    cast.remove_actor(BULLET_GROUP, bullet)
