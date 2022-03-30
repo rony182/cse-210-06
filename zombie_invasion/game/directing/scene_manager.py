@@ -11,6 +11,7 @@ from game.casting.player import Player
 from game.casting.point import Point
 from game.casting.stats import Stats
 from game.casting.text import Text 
+from game.scripting.add_zombie_action import AddZombieAction
 from game.scripting.change_scene_action import ChangeSceneAction
 from game.scripting.check_over_action import CheckOverAction
 from game.scripting.collide_borders_action import CollideBordersAction
@@ -49,6 +50,7 @@ class SceneManager:
     PHYSICS_SERVICE = RaylibPhysicsService()
     VIDEO_SERVICE = RaylibVideoService(GAME_NAME, SCREEN_WIDTH, SCREEN_HEIGHT)
 
+    ADD_ZOMBIE_ACTION = AddZombieAction(VIDEO_SERVICE)
     CHECK_OVER_ACTION = CheckOverAction()
     COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_ZOMBIE_ACTION = CollideZombieAction(PHYSICS_SERVICE, AUDIO_SERVICE)
@@ -181,6 +183,7 @@ class SceneManager:
         # Add the collision action between Zombie and Player
         script.add_action(UPDATE, self.COLLIDE_ZOMBIE_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BULLET_ACTION)
+        script.add_action(UPDATE, self.ADD_ZOMBIE_ACTION)
         # Add the colission action with the borders
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
         # Add the DRAW_PLAYER and DRAW_ZOMBIES actions to make them appear
@@ -209,12 +212,12 @@ class SceneManager:
         # Clear any previous zombies from Cast
         cast.clear_actors(ZOMBIE_GROUP)
         
-        for _ in range(15):
+        for _ in range(ZOMBIE_MAX_NUMBER):
 
-            img = Image("zombie_invasion\\assets\\images\\zombie_1_30px.png")
+            img = Image(ZOMBIE_IMAGES[randint(0, 3)])
             # Get random positions for the zombie to appear
+            y = randint(0, 200)
             x = randint(0, SCREEN_WIDTH)
-            y = randint(0, SCREEN_HEIGHT)
             # Create the Zombie body
             body = Body(Point(x, y), Point(ZOMBIE_WIDTH, ZOMBIE_HEIGHT), Point(0, ZOMBIE_VELOCITY))
             # Create Zombie

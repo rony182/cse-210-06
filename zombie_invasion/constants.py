@@ -110,14 +110,10 @@ PLAYER_RATE = 60
 PLAYER_VELOCITY = 7
 
 # ZOMBIES
+ZOMBIE_MAX_NUMBER = 30
 ZOMBIE_VELOCITY = 1
 ZOMBIE_GROUP = "zombies"
-ZOMBIE_IMAGES = {
-    "a": [f"assets\\images\\zombie_{i:02}.png" for i in range(1, 4)],
-    "b": [f"assets\\images\\zombie_{i:02}.png"for i in range(1, 4)],
-    "c": [f"assets\\images\\zombie_{i:02}.png"for i in range(1, 4)],
-    "d": [f"assets\\images\\zombie_{i:02}.png"for i in range(1, 4)]
-}
+ZOMBIE_IMAGES = [f"zombie_invasion\\assets\\images\\zombie_{i}_30px.png" for i in range(1, 5)]
 ZOMBIE_WIDTH = 30
 ZOMBIE_HEIGHT = 47
 ZOMBIE_POINTS = 5
