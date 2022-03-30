@@ -180,6 +180,7 @@ class SceneManager:
         script.add_action(UPDATE, self.MOVE_BULLET_ACTION)
         # Add the collision action between Zombie and Player
         script.add_action(UPDATE, self.COLLIDE_ZOMBIE_ACTION)
+        script.add_action(UPDATE, self.COLLIDE_BULLET_ACTION)
         # Add the colission action with the borders
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
         # Add the DRAW_PLAYER and DRAW_ZOMBIES actions to make them appear
