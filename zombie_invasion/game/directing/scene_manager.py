@@ -201,15 +201,9 @@ class SceneManager:
     def _add_zombies(self, cast):
         # Clear any previous zombies from Cast
         cast.clear_actors(ZOMBIE_GROUP)
-<<<<<<< HEAD
         
         for _ in range(15):
 
-=======
-        # Create a certain number of zombies
-        for _ in range(10):
-            # Get image file
->>>>>>> 06381361d72190bc751240e9d5ba36b64bed22df
             img = Image("zombie_invasion\\assets\\images\\zombie_1_30px.png")
             # Get random positions for the zombie to appear
             x = randint(0, SCREEN_WIDTH)
