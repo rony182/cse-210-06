@@ -59,6 +59,7 @@ class SceneManager:
     LOAD_ASSETS_ACTION = LoadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
     MOVE_BULLET_ACTION = MoveBulletAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     MOVE_PLAYER_ACTION = MovePlayerAction()
+    MOVE_ZOMBIE_ACTION = MoveZombieAction()
     RELEASE_DEVICES_ACTION = ReleaseDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     START_DRAWING_ACTION = StartDrawingAction(VIDEO_SERVICE)
     UNLOAD_ASSETS_ACTION = UnloadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
@@ -163,6 +164,9 @@ class SceneManager:
 
         script.clear_actions(INPUT)
         script.add_action(INPUT, self.CONTROL_PLAYER_ACTION)
+
+        script.add_action(UPDATE, self.MOVE_ZOMBIE_ACTION)
+
         script.add_action(OUTPUT, self.DRAW_PLAYER_ACTION)
         script.add_action(OUTPUT, self.DRAW_ZOMBIES_ACTION)
 
