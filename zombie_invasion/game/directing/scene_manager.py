@@ -81,14 +81,15 @@ class SceneManager:
 
     # HOW TO PLAY SCENE
     SCENE_1_NAME = "How to play"
-    INSTRUCTIONS = "INSERT INSTRUCTIONS"
-    '''f"1. Choose a character to start playing.\n      \
-    2. Move the character to left or right with the arrow keys.\n   \
-    3. Press \"space bar\" to shoot the zombies.\n                  \
-    ! You will lose a life if you get bitten by a zombie.\n         \
-    ! Some zombies require multiple shots to die.\n                 \
-    ! If 10+ zombies walk past you, you will lose a life.\n         \
-    GOOD LUCK AND STAY ALIVE!"'''
+
+    INSTRUCTIONS = f"1# Choose a character to start playing\n"\
+    f"2# Move the character to left or right with the arrow keys\n"\
+    f"3# Press the space bar to shoot the zombies\n"\
+    f"!! Some zombies require multiple shots to die\n"\
+    f"!! You will lose a life if you get bitten by a zombie\n"\
+    f"!! You will lose a life if 10 or more zombies walk past you\n"\
+    f"GOOD LUCK AND STAY ALIVE!"
+
     SCORE_TABLE = "Insert score here"
 
     # PLAYER SELECTION SCENE
@@ -141,7 +142,7 @@ class SceneManager:
         
         cast.clear_actors(DIALOG_GROUP)
         self._add_dialog(cast, self.SCENE_1_NAME, CENTER_X, 100)
-        self._add_dialog(cast, self.INSTRUCTIONS, CENTER_X, CENTER_Y)
+        self._add_dialog(cast, self.INSTRUCTIONS, CENTER_X, 185)
         self._add_dialog(cast, self.SCORE_TABLE, CENTER_X, CENTER_Y + 200)
 
         script.clear_actions(INPUT)
