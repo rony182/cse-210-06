@@ -103,9 +103,15 @@ BULLET_QUANTITY = 30
 
 # PLAYER
 PLAYER_GROUP = "player"
+<<<<<<< HEAD
 PLAYER_IMAGES = [f"assets\\images\\PLAYER_{n:02}.png" for n in range(1, 4)]
 PLAYER_WIDTH = 30
 PLAYER_HEIGHT = 47
+=======
+PLAYER_IMAGES = [f"assets\\images\\PLAYER_{n:02}.png" for n in range(1, 2)]
+PLAYER_WIDTH = 20
+PLAYER_HEIGHT = 40
+>>>>>>> 06381361d72190bc751240e9d5ba36b64bed22df
 PLAYER_RATE = 60
 PLAYER_VELOCITY = 7
 
