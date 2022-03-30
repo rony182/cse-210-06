@@ -80,13 +80,14 @@ class SceneManager:
     # HOW TO PLAY SCENE
     SCENE_1_NAME = "How to play"
 
-    INSTRUCTIONS = f"Choose a character to start playing\n"\
-    f"Move the character to left or right with the arrow keys\n"\
-    f"Press the space bar to shoot the zombies\n"\
-    f"You will lose a life if you get bitten by a zombie\n"\
-    f"Some zombies require multiple shots to die\n"\
-    f"You will lose a life if 10 or more zombies walk past you\n"\
+    INSTRUCTIONS = f"1# Choose a character to start playing\n"\
+    f"2# Move the character to left or right with the arrow keys\n"\
+    f"3# Press the space bar to shoot the zombies\n"\
+    f"!! Some zombies require multiple shots to die\n"\
+    f"!! You will lose a life if you get bitten by a zombie\n"\
+    f"!! You will lose a life if 10 or more zombies walk past you\n"\
     f"GOOD LUCK AND STAY ALIVE!"
+
     SCORE_TABLE = "Insert score here"
 
     # PLAYER SELECTION SCENE
