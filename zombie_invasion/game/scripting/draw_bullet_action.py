@@ -16,7 +16,6 @@ class DrawBulletAction(Action):
                 rectangle = body.get_rectangle()
                 self._video_service.draw_rectangle(rectangle, YELLOW)
                 
-            animation = bullet.get_animation()
-            image = animation.next_image()
+            image = bullet.get_image()
             position = body.get_position()
             self._video_service.draw_image(image, position)
