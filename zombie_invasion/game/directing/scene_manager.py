@@ -92,7 +92,7 @@ class SceneManager:
 
 
     # Player Image Filepath
-    PLAYER_FILEPATH = "zombie_invasion\\assets\\images\\player_1.png"
+    PLAYER_FILEPATH = "zombie_invasion\\assets\\images\\player_1_30px.png"
 
     def __init__(self):
         pass
