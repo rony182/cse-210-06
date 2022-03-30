@@ -100,7 +100,6 @@ class SceneManager:
 
     # Player Image Filepath
     PLAYER_FILEPATH = "zombie_invasion\\assets\\images\\player_3_30px.png"
-    BULLET_FILEPATH = "zombie_invasion\\assets\\images\\bullet.png"
 
     def __init__(self):
         pass
@@ -253,12 +252,12 @@ class SceneManager:
         size = Point(PLAYER_WIDTH, PLAYER_HEIGHT)
         velocity = Point(0, 0)
         body = Body(position, size, velocity)
-        bullet = Bullet(body, self.BULLET_FILEPATH)
+        # bullet = Bullet(body, self.BULLET_FILEPATH)
         #animation = Animation(PLAYER_IMAGES, PLAYER_RATE)
         image = Image(self.PLAYER_FILEPATH)
         player = Player(body, image)
         cast.add_actor(PLAYER_GROUP, player)
-        cast.add_actor(PLAYER_GROUP, bullet)
+        # cast.add_actor(PLAYER_GROUP, bullet)
 
     # ----------------------------------------------------------------------------------------------
     # scripting methods
