@@ -16,3 +16,6 @@ class MoveZombieAction(Action):
             velocity = body.get_velocity()
             position = position.add(velocity)
             body.set_position(position)
+            
+            if body.get_position().get_y() > SCREEN_HEIGHT:
+                cast.remove_actor(ZOMBIE_GROUP, zombie)
