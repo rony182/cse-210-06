@@ -4,6 +4,7 @@ from constants import *
 from game.casting.animation import Animation
 from game.casting.body import Body
 from game.casting.zombie import Zombie
+from game.casting.bullet import Bullet
 from game.casting.image import Image
 from game.casting.label import Label
 from game.casting.player import Player
@@ -14,6 +15,7 @@ from game.scripting.change_scene_action import ChangeSceneAction
 from game.scripting.check_over_action import CheckOverAction
 from game.scripting.collide_borders_action import CollideBordersAction
 from game.scripting.collide_zombie_action import CollideZombieAction
+from game.scripting.collide_bullet_action import CollideBulletAction
 from game.scripting.control_player_action import ControlPlayerAction
 from game.scripting.draw_bullet_action import DrawBulletAction
 from game.scripting.draw_player_action import DrawPlayerAction
@@ -35,6 +37,7 @@ from game.services.raylib.raylib_audio_service import RaylibAudioService
 from game.services.raylib.raylib_keyboard_service import RaylibKeyboardService
 from game.services.raylib.raylib_physics_service import RaylibPhysicsService
 from game.services.raylib.raylib_video_service import RaylibVideoService
+from game.services.physics_service import PhysicsService
 
 
 class SceneManager:
@@ -48,6 +51,7 @@ class SceneManager:
     CHECK_OVER_ACTION = CheckOverAction()
     COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_ZOMBIE_ACTION = CollideZombieAction(PHYSICS_SERVICE, AUDIO_SERVICE)
+    COLLIDE_BULLET_ACTION = CollideBulletAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     CONTROL_PLAYER_ACTION = ControlPlayerAction(KEYBOARD_SERVICE)
     DRAW_BULLET_ACTION = DrawBulletAction(VIDEO_SERVICE)
     DRAW_ZOMBIES_ACTION = DrawZombiesAction(VIDEO_SERVICE)
@@ -92,7 +96,7 @@ class SceneManager:
 
 
     # Player Image Filepath
-    PLAYER_FILEPATH = "zombie_invasion\\assets\\images\\player_1.png"
+    PLAYER_FILEPATH = "zombie_invasion\\assets\\images\\player_3_30px.png"
 
     def __init__(self):
         pass
@@ -190,7 +194,7 @@ class SceneManager:
     def _add_zombies(self, cast):
         cast.clear_actors(ZOMBIE_GROUP)
         
-        for _ in range(10):
+        for _ in range(15):
 
             img = Image("zombie_invasion\\assets\\images\\zombie_1_30px.png")
 
@@ -304,7 +308,7 @@ class SceneManager:
         script.add_action(UPDATE, self.MOVE_BULLET_ACTION)
         script.add_action(UPDATE, self.MOVE_PLAYER_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
-        script.add_action(UPDATE, self.COLLIDE_ZOMBIES_ACTION)
-        script.add_action(UPDATE, self.COLLIDE_PLAYER_ACTION)
-        script.add_action(UPDATE, self.MOVE_PLAYER_ACTION)
+        script.add_action(UPDATE, self.COLLIDE_ZOMBIE_ACTION)
+        script.add_action(UPDATE, self.COLLIDE_BULLET_ACTION)
+        
         script.add_action(UPDATE, self.CHECK_OVER_ACTION)

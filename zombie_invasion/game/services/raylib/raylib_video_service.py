@@ -10,7 +10,7 @@ from game.services.video_service import VideoService
 class RaylibVideoService(VideoService):
     """ A Raylib implementation of VideoService."""
 
-    def __init__(self, title = "", width = 640, height = 480, color = BLACK):
+    def __init__(self, title = "", width = 640, height = 480, color = WHITE):
         self._title = title
         self._width = width
         self._height = height
@@ -33,7 +33,7 @@ class RaylibVideoService(VideoService):
         raylib_position = pyray.Vector2(x, y)
         scale = image.get_scale()
         rotation = image.get_rotation()
-        tint = self._to_raylib_color(Color(255,255,255)) 
+        tint = self._to_raylib_color(Color(255, 255, 255)) 
         pyray.draw_texture_ex(texture, raylib_position, rotation, scale, tint)
          
     def draw_rectangle(self, rectangle, color, filled = False):
@@ -56,7 +56,7 @@ class RaylibVideoService(VideoService):
         size = text.get_size()
         spacing = 0
         alignment = text.get_alignment()
-        tint = self._to_raylib_color(Color(255, 255, 255))
+        tint = self._to_raylib_color(Color(0, 0, 0))
 
         font = self._fonts[f"zombie_invasion\\{filepath}"]
         text_image = pyray.image_text_ex(font, value, size, spacing, tint)

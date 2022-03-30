@@ -23,7 +23,7 @@ FIELD_RIGHT = SCREEN_WIDTH
 # FONT
 FONT_FILE = "assets\\fonts\\SkullAttack.ttf"
 FONT_SMALL = 32
-FONT_LARGE = 48
+FONT_LARGE = 50
 
 # SOUND
 SHOT_SOUND = "assets\\sounds\\shot.mp3"
@@ -103,9 +103,9 @@ BULLET_QUANTITY = 30
 
 # PLAYER
 PLAYER_GROUP = "player"
-PLAYER_IMAGES = [f"assets\\images\\PLAYER_{n:02}.png" for n in range(1, 2)]
-PLAYER_WIDTH = 40
-PLAYER_HEIGHT = 20
+PLAYER_IMAGES = [f"assets\\images\\PLAYER_{n:02}.png" for n in range(1, 4)]
+PLAYER_WIDTH = 30
+PLAYER_HEIGHT = 47
 PLAYER_RATE = 60
 PLAYER_VELOCITY = 7
 
@@ -113,12 +113,13 @@ PLAYER_VELOCITY = 7
 ZOMBIE_VELOCITY = 1
 ZOMBIE_GROUP = "zombies"
 ZOMBIE_IMAGES = {
-    "a": [f"assets\\images\\zombie_{i:02}.png" for i in range(1, 3)],
-    "b": [f"assets\\images\\zombie_{i:02}.png"for i in range(1, 3)],
-    "c": [f"assets\\images\\zombie_{i:02}.png"for i in range(1, 3)],
+    "a": [f"assets\\images\\zombie_{i:02}.png" for i in range(1, 4)],
+    "b": [f"assets\\images\\zombie_{i:02}.png"for i in range(1, 4)],
+    "c": [f"assets\\images\\zombie_{i:02}.png"for i in range(1, 4)],
+    "d": [f"assets\\images\\zombie_{i:02}.png"for i in range(1, 4)]
 }
-ZOMBIE_WIDTH = 12
-ZOMBIE_HEIGHT = 20
+ZOMBIE_WIDTH = 30
+ZOMBIE_HEIGHT = 47
 ZOMBIE_POINTS = 5
 
 # DIALOG
