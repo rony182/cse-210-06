@@ -168,6 +168,8 @@ class SceneManager:
         script.add_action(INPUT, self.CONTROL_PLAYER_ACTION)
         # Add the MOVE_ZOMBIE_ACTION to make zombies go down automatically
         script.add_action(UPDATE, self.MOVE_ZOMBIE_ACTION)
+        # Add the collision action between Zombie and Player
+        script.add_action(UPDATE, self.COLLIDE_ZOMBIE_ACTION)
         # Add the DRAW_PLAYER and DRAW_ZOMBIES actions to make them appear
         script.add_action(OUTPUT, self.DRAW_PLAYER_ACTION)
         script.add_action(OUTPUT, self.DRAW_ZOMBIES_ACTION)
