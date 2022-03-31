@@ -6,11 +6,11 @@ from game.casting.color import Color
 
 # TITLE
 GAME_NAME = "Zombie Invasion"
-FRAME_RATE = 60
+FRAME_RATE = 20
 
 # SCREEN
 SCREEN_WIDTH = 1024
-SCREEN_HEIGHT = 720
+SCREEN_HEIGHT = 880
 CENTER_X = SCREEN_WIDTH / 2
 CENTER_Y = SCREEN_HEIGHT / 2
 
@@ -26,6 +26,7 @@ FONT_SMALL = 32
 FONT_LARGE = 50
 
 # SOUND
+BACKGROUND_MENU= "assets\\sounds\\mixkit-piano-horror.mp3"
 SHOT_SOUND = "assets\\sounds\\shot.mp3"
 ZOMBIE_GROUP_SOUND = "assets\\sounds\\group_of_zombies.mp3"
 ZOMBIE_ATTACK_SOUND = "assets\\sounds\\zombie_attack.mp3"
@@ -112,7 +113,7 @@ PLAYER_RATE = 60
 PLAYER_VELOCITY = 7
 
 # ZOMBIES
-ZOMBIE_MAX_NUMBER = 20
+ZOMBIE_MAX_NUMBER = 10
 ZOMBIE_VELOCITY = 1
 ZOMBIE_GROUP = "zombies"
 ZOMBIE_IMAGES = [f"zombie_invasion\\assets\\images\\zombie_{i}_30px.png" for i in range(1, 5)]
