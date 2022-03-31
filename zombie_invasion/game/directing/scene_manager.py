@@ -20,10 +20,11 @@ from game.scripting.collide_bullet_action import CollideBulletAction
 from game.scripting.control_player_action import ControlPlayerAction
 from game.scripting.control_bullet_action import ControlBulletAction
 from game.scripting.draw_bullet_action import DrawBulletAction
-from game.scripting.draw_player_action import DrawPlayerAction
-from game.scripting.draw_zombies_action import DrawZombiesAction
 from game.scripting.draw_dialog_action import DrawDialogAction
 from game.scripting.draw_hud_action import DrawHudAction
+from game.scripting.draw_sprite_action import DrawSpriteAction
+from game.scripting.draw_player_action import DrawPlayerAction
+from game.scripting.draw_zombies_action import DrawZombiesAction
 from game.scripting.end_drawing_action import EndDrawingAction
 from game.scripting.initialize_devices_action import InitializeDevicesAction
 from game.scripting.load_assets_action import LoadAssetsAction
@@ -58,10 +59,11 @@ class SceneManager:
     CONTROL_PLAYER_ACTION = ControlPlayerAction(KEYBOARD_SERVICE)
     CONTROL_BULLET_ACTION= ControlBulletAction(KEYBOARD_SERVICE)
     DRAW_BULLET_ACTION = DrawBulletAction(VIDEO_SERVICE)
-    DRAW_ZOMBIES_ACTION = DrawZombiesAction(VIDEO_SERVICE)
     DRAW_DIALOG_ACTION = DrawDialogAction(VIDEO_SERVICE)
     DRAW_HUD_ACTION = DrawHudAction(VIDEO_SERVICE)
     DRAW_PLAYER_ACTION = DrawPlayerAction(VIDEO_SERVICE)
+    DRAW_SPRITE_ACTION = DrawSpriteAction(VIDEO_SERVICE)
+    DRAW_ZOMBIES_ACTION = DrawZombiesAction(VIDEO_SERVICE)
     END_DRAWING_ACTION = EndDrawingAction(VIDEO_SERVICE)
     INITIALIZE_DEVICES_ACTION = InitializeDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     LOAD_ASSETS_ACTION = LoadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
@@ -162,15 +164,19 @@ class SceneManager:
         self._add_dialog(cast, self.NEXT_CHARACTER, SCREEN_WIDTH - 100)
         self._add_dialog(cast, self.SELECT_CHARACTER, CENTER_X, SCREEN_HEIGHT - 100)
 
+        img = Image(PLAYER_IMAGES_BIG[0])
+        cast.add_actor(SPRITES_GROUP, img)
+
         script.clear_actions(INPUT)
         script.add_action(INPUT, ChangeSceneAction(self.KEYBOARD_SERVICE, IN_PLAY))
-        #script.add_action(INPUT, TimedChangeSceneAction(IN_PLAY, 2))
         self._add_output_script(script)
+        script.add_action(OUTPUT, self.DRAW_SPRITE_ACTION)
         script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, WELCOME_SOUND))
         
     def _prepare_in_play(self, cast, script):
         # Clear all previous dialogs
         cast.clear_actors(DIALOG_GROUP)
+        cast.clear_actors(SPRITES_GROUP)
         # Add the player
         self._add_player(cast)
         # Add the zombies
@@ -181,6 +187,7 @@ class SceneManager:
         lives_lbl = Label(Text(""), Point(LIVES_MARGIN, HUD_MARGIN))
         cast.add_actor(SCORE_GROUP, score_lbl)
         cast.add_actor(LIVES_GROUP, lives_lbl)
+        script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, BACKGROUND_SOUND))
 
         # Clear previous INPUT actions
         script.clear_actions(INPUT)
@@ -206,14 +213,17 @@ class SceneManager:
         pass
 
     def _prepare_game_over(self, cast, script):
-        self._add_bullet(cast)
+        # self._add_bullet(cast)
         self._add_player(cast)
         self._add_dialog(cast, WAS_GOOD_GAME)
+        self._add_dialog(cast, "Press ENTER to play again", CENTER_X, SCREEN_HEIGHT - 100)
 
         script.clear_actions(INPUT)
-        script.add_action(INPUT, TimedChangeSceneAction(NEW_GAME, 5))
         script.clear_actions(UPDATE)
+        script.add_action(INPUT, ChangeSceneAction(self.KEYBOARD_SERVICE, IN_PLAY))
         self._add_output_script(script)
+
+        self.STATS.reset()
 
     # ----------------------------------------------------------------------------------------------
     # casting methods
@@ -225,14 +235,15 @@ class SceneManager:
         
         for _ in range(ZOMBIE_MAX_NUMBER):
 
-            img = Image(ZOMBIE_IMAGES[randint(0, 3)])
+            i = randint(0, 3)
+            img = Image(ZOMBIE_IMAGES[i])
             # Get random positions for the zombie to appear
             y = randint(0, 200)
             x = randint(0, SCREEN_WIDTH)
             # Create the Zombie body
             body = Body(Point(x, y), Point(ZOMBIE_WIDTH, ZOMBIE_HEIGHT), Point(0, ZOMBIE_VELOCITY))
             # Create Zombie
-            zombie = Zombie(body, img, 10)
+            zombie = Zombie(body, img, (i + 1) * 10)
             # Add Zombie to the cast
             cast.add_actor(ZOMBIE_GROUP, zombie)
 
