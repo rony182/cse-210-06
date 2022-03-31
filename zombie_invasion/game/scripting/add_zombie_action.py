@@ -16,13 +16,14 @@ class AddZombieAction(Action):
         
         zombies = cast.get_actors(ZOMBIE_GROUP)
         if len(zombies) < ZOMBIE_MAX_NUMBER:
-
-            img = Image(ZOMBIE_IMAGES[randint(0, 3)])
+            
+            i = randint(0, 3)
+            img = Image(ZOMBIE_IMAGES[i])
             # Get random positions for the zombie to appear
             x = randint(0, SCREEN_WIDTH)
             # Create the Zombie body
             body = Body(Point(x, 0), Point(ZOMBIE_WIDTH, ZOMBIE_HEIGHT), Point(0, ZOMBIE_VELOCITY))
             # Create Zombie
-            zombie = Zombie(body, img, 10)
+            zombie = Zombie(body, img, (i + 1) * 10)
             # Add Zombie to the cast
             cast.add_actor(ZOMBIE_GROUP, zombie)
