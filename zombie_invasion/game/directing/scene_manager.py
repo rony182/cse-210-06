@@ -140,9 +140,11 @@ class SceneManager:
         self._add_load_script(script)
         script.clear_actions(INPUT)
         script.add_action(INPUT, ChangeSceneAction(self.KEYBOARD_SERVICE, HOW_TO_PLAY))
+        
         self._add_output_script(script)
         self._add_unload_script(script)
         self._add_release_script(script)
+        # script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, BACKGROUND_MENU))
         
     def _prepare_how_to_play(self, cast, script):
         
@@ -170,6 +172,7 @@ class SceneManager:
         self._add_output_script(script)
         script.add_action(OUTPUT, self.DRAW_SPRITE_ACTION)
         script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, WELCOME_SOUND))
+        
         
     def _prepare_in_play(self, cast, script):
         # Clear all previous dialogs
@@ -313,7 +316,7 @@ class SceneManager:
     def _add_update_script(self, script):
         script.clear_actions(UPDATE)
         script.add_action(UPDATE, self.MOVE_BULLET_ACTION)
-        script.add_action(UPDATE, self.MOVE_PLAYER_ACTION)
+        script.add_action(UPDATE, self.CONTROL_PLAYER_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
         script.add_action(UPDATE, self.COLLIDE_ZOMBIE_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BULLET_ACTION)
