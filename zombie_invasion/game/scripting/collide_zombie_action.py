@@ -15,7 +15,7 @@ class CollideZombieAction(Action):
         player = cast.get_first_actor(PLAYER_GROUP)
         
         for zombie in zombies:
-            zombie_body= zombie.get_body()
+            zombie_body = zombie.get_body()
             player_body = player.get_body()
             if self._physics_service.has_collided(player_body, zombie_body):
                 sound = Sound(ZOMBIE_ATTACK_SOUND)
@@ -23,6 +23,9 @@ class CollideZombieAction(Action):
                 stats = cast.get_first_actor(STATS_GROUP)
                 stats.lose_life()
                 
+                cast.remove_actor(ZOMBIE_GROUP, zombie)
+
                 if stats.get_lives() == 0:
-                    callback.on_next(GAME_OVER)
-                    self._audio_service.play_sound(OVER_SOUND)
+                     callback.on_next(GAME_OVER)
+                     sound = Sound(ZOMBIE_ATTACK_SOUND)
+                     self._audio_service.play_sound(sound)
