@@ -23,7 +23,7 @@ class CollideBulletAction(Action):
                 if self._physics_service.has_collided(bullet_body, zombie_body):
                     sound = Sound(IMPACT_SOUND)
                     self._audio_service.play_sound(sound)
-                    #points = zombie.get_points()
-                    #stats.add_points(points)
+                    points = zombie.get_points()
+                    stats.add_points(points)
                     cast.remove_actor(ZOMBIE_GROUP, zombie)
                     cast.remove_actor(BULLET_GROUP, bullet)
