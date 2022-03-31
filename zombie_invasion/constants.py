@@ -105,9 +105,9 @@ BULLET_QUANTITY = 30
 
 # PLAYER
 PLAYER_GROUP = "player"
-PLAYER_IMAGES = [f"assets\\images\\PLAYER_{n:02}.png" for n in range(1, 4)]
-PLAYER_WIDTH = 30
-PLAYER_HEIGHT = 47
+PLAYER_IMAGES = [f"zombie_invasion\\assets\\images\\player_{n}_30px.png" for n in range(1, 5)]
+PLAYER_WIDTH = 50
+PLAYER_HEIGHT = 75
 PLAYER_RATE = 60
 PLAYER_VELOCITY = 7
 
@@ -116,9 +116,15 @@ ZOMBIE_MAX_NUMBER = 20
 ZOMBIE_VELOCITY = 1
 ZOMBIE_GROUP = "zombies"
 ZOMBIE_IMAGES = [f"zombie_invasion\\assets\\images\\zombie_{i}_30px.png" for i in range(1, 5)]
-ZOMBIE_WIDTH = 30
-ZOMBIE_HEIGHT = 47
+ZOMBIE_WIDTH = 50
+ZOMBIE_HEIGHT = 75
 ZOMBIE_POINTS = 5
+
+# PLAYER SPRITES
+SPRITES_GROUP = "sprites"
+PLAYER_IMAGES_BIG = [f"zombie_invasion\\assets\\images\\player_{n}.png" for n in range(1, 5)]
+SPRITE_WIDTH = 200
+SPRITE_HEIGHT = 352
 
 # DIALOG
 DIALOG_GROUP = "dialogs"
