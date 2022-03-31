@@ -29,7 +29,6 @@ from game.scripting.end_drawing_action import EndDrawingAction
 from game.scripting.initialize_devices_action import InitializeDevicesAction
 from game.scripting.load_assets_action import LoadAssetsAction
 from game.scripting.move_bullet_action import MoveBulletAction
-from game.scripting.move_player_action import MovePlayerAction
 from game.scripting.move_zombie_action import MoveZombieAction
 from game.scripting.play_sound_action import PlaySoundAction
 from game.scripting.release_devices_action import ReleaseDevicesAction
@@ -68,7 +67,6 @@ class SceneManager:
     INITIALIZE_DEVICES_ACTION = InitializeDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     LOAD_ASSETS_ACTION = LoadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
     MOVE_BULLET_ACTION = MoveBulletAction(PHYSICS_SERVICE, AUDIO_SERVICE)
-    MOVE_PLAYER_ACTION = MovePlayerAction()
     MOVE_ZOMBIE_ACTION = MoveZombieAction()
     RELEASE_DEVICES_ACTION = ReleaseDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     START_DRAWING_ACTION = StartDrawingAction(VIDEO_SERVICE)
