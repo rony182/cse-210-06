@@ -13,7 +13,6 @@ from game.casting.stats import Stats
 from game.casting.text import Text 
 from game.scripting.add_zombie_action import AddZombieAction
 from game.scripting.change_scene_action import ChangeSceneAction
-from game.scripting.check_over_action import CheckOverAction
 from game.scripting.collide_borders_action import CollideBordersAction
 from game.scripting.collide_zombie_action import CollideZombieAction
 from game.scripting.collide_bullet_action import CollideBulletAction
@@ -35,11 +34,13 @@ from game.scripting.release_devices_action import ReleaseDevicesAction
 from game.scripting.start_drawing_action import StartDrawingAction
 from game.scripting.timed_change_scene_action import TimedChangeSceneAction
 from game.scripting.unload_assets_action import UnloadAssetsAction
+from game.scripting.change_player_action import ChangePlayerAction
 from game.services.raylib.raylib_audio_service import RaylibAudioService
 from game.services.raylib.raylib_keyboard_service import RaylibKeyboardService
 from game.services.raylib.raylib_physics_service import RaylibPhysicsService
 from game.services.raylib.raylib_video_service import RaylibVideoService
 from game.services.physics_service import PhysicsService
+
 
 
 class SceneManager:
@@ -51,12 +52,12 @@ class SceneManager:
     VIDEO_SERVICE = RaylibVideoService(GAME_NAME, SCREEN_WIDTH, SCREEN_HEIGHT)
 
     ADD_ZOMBIE_ACTION = AddZombieAction(VIDEO_SERVICE)
-    CHECK_OVER_ACTION = CheckOverAction()
     COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_ZOMBIE_ACTION = CollideZombieAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_BULLET_ACTION = CollideBulletAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     CONTROL_PLAYER_ACTION = ControlPlayerAction(KEYBOARD_SERVICE)
-    CONTROL_BULLET_ACTION= ControlBulletAction(KEYBOARD_SERVICE)
+    CONTROL_BULLET_ACTION = ControlBulletAction(KEYBOARD_SERVICE)
+    # CHANGE_PLAYER_ACTION = ChangePlayerAction(KEYBOARD_SERVICE)
     DRAW_BULLET_ACTION = DrawBulletAction(VIDEO_SERVICE)
     DRAW_DIALOG_ACTION = DrawDialogAction(VIDEO_SERVICE)
     DRAW_HUD_ACTION = DrawHudAction(VIDEO_SERVICE)
@@ -101,9 +102,11 @@ class SceneManager:
     # PLAYER SELECTION SCENE
     SCENE_2_NAME = "Choose your character"
     SELECT_CHARACTER = "Press ENTER to start"
-    PREVIOUS_CHARACTER = "<- Previous"
-    NEXT_CHARACTER = "Next ->"
+    PREVIOUS_CHARACTER = "Previous"
+    NEXT_CHARACTER = "Next"
 
+    # GAME OVER SCENE:
+    SCORE = F"Score {STATS.get_score()}"
 
     # Player Image Filepath
     PLAYER_FILEPATH = "zombie_invasion\\assets\\images\\player_1_30px.png"
@@ -157,15 +160,20 @@ class SceneManager:
         script.add_action(INPUT, ChangeSceneAction(self.KEYBOARD_SERVICE, PLAYER_SELECTION))
 
     def _prepare_player_selection(self, cast, script):
-        
         cast.clear_actors(DIALOG_GROUP)
         self._add_dialog(cast, self.SCENE_2_NAME, CENTER_X, 100)
         self._add_dialog(cast, self.PREVIOUS_CHARACTER, 100, CENTER_Y)
         self._add_dialog(cast, self.NEXT_CHARACTER, SCREEN_WIDTH - 100)
         self._add_dialog(cast, self.SELECT_CHARACTER, CENTER_X, SCREEN_HEIGHT - 100)
 
-        img = Image(PLAYER_IMAGES_BIG[0])
-        cast.add_actor(SPRITES_GROUP, img)
+        # Cast all images under "Sprites" list:
+        for i in range(0, 4):
+            img = Image(PLAYER_IMAGES_BIG[i])
+            cast.add_actor(SPRITES_GROUP, img)
+
+        # Call the ChangePlayerAction class:
+        
+
 
         script.clear_actions(INPUT)
         script.add_action(INPUT, ChangeSceneAction(self.KEYBOARD_SERVICE, IN_PLAY))
@@ -216,6 +224,7 @@ class SceneManager:
     def _prepare_game_over(self, cast, script):
         # self._add_bullet(cast)
         self._add_player(cast)
+        self._add_dialog(cast, self.SCORE, CENTER_X, 100)
         self._add_dialog(cast, WAS_GOOD_GAME)
         self._add_dialog(cast, "Press ENTER to play again", CENTER_X, SCREEN_HEIGHT - 100)
 
@@ -321,4 +330,3 @@ class SceneManager:
         script.add_action(UPDATE, self.COLLIDE_ZOMBIE_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BULLET_ACTION)
         script.add_action(UPDATE, self.DRAW_BULLET_ACTION)
-        script.add_action(UPDATE, self.CHECK_OVER_ACTION)
