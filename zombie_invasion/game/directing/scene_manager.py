@@ -1,4 +1,5 @@
 import csv
+from ctypes.wintypes import POINT
 from random import randint
 from constants import *
 from game.casting.animation import Animation
@@ -96,7 +97,10 @@ class SceneManager:
     f"!! You will lose a life if 10 or more zombies walk past you\n"\
     f"GOOD LUCK AND STAY ALIVE!"
 
-    SCORE_TABLE = "Insert score here"
+    SCORE_TABLE = f"Zombie 1 10 points\n"\
+        f"Zombie 2  20 points\n"\
+        f"Zombie 3  30 points\n"\
+        f"Zombie 4  40 points\n"\
 
     # PLAYER SELECTION SCENE
     SCENE_2_NAME = "Choose your character"
@@ -153,7 +157,7 @@ class SceneManager:
         cast.clear_actors(DIALOG_GROUP)
         self._add_dialog(cast, self.SCENE_1_NAME, CENTER_X, 100)
         self._add_dialog(cast, self.INSTRUCTIONS, CENTER_X, 185)
-        self._add_dialog(cast, self.SCORE_TABLE, CENTER_X, CENTER_Y + 200)
+        self._add_dialog(cast, self.SCORE_TABLE, CENTER_X, CENTER_Y + 150)
 
         script.clear_actions(INPUT)
         script.add_action(INPUT, ChangeSceneAction(self.KEYBOARD_SERVICE, PLAYER_SELECTION))
