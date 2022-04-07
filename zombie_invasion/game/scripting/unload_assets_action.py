@@ -7,6 +7,7 @@ class UnloadAssetsAction(Action):
         self._video_service = video_service
 
     def execute(self, cast, script, callback):
+        """Clears services from GPU memory."""
         self._audio_service.unload_sounds()
         self._video_service.unload_fonts()
         self._video_service.unload_images()
